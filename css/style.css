@@ -1,0 +1,148 @@
+:root {
+  --xxl: 6rem;
+  --xl: 5rem;
+  --lg: 3rem;
+  --med: 2.5rem;
+  --blue: oklch(62.3% 0.214 259.815);
+  --blue-hover: oklch(52.3% 0.214 259.815);
+  --grey: oklch(87.2% 0.01 258.338);
+}
+
+@font-face {
+  font-family: "DynaPuff";
+  src: url("../fonts/DynaPuffCondensed-Regular.woff") format("woff2"),
+    url("../fonts/DynaPuffCondensed-Regular.woff2") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: "DynaPuff", "Arial Narrow", Arial, sans-serif, system-ui,
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell;
+}
+
+body {
+  display: grid;
+  grid-template-rows: 15% 1fr 5%;
+}
+
+/* Header  */
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--xl);
+}
+
+/* Main  */
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-info-container {
+  display: flex;
+  gap: 3em;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-info-container .game-logs {
+  border: 3px solid black;
+  padding: 0.5em 2em;
+  border-radius: 100vw;
+  font-size: var(--med);
+}
+
+.game-info-container button {
+  border-radius: 5px;
+  background-color: white;
+  border: none;
+}
+
+.game-info-container img {
+  height: 5rem;
+  width: 5rem;
+  object-fit: cover;
+}
+
+.cell-container {
+  margin: 1em;
+  width: 50rem;
+  height: 45rem;
+  display: grid;
+  grid-template-columns: repeat(3, calc(100% / 3));
+  border: 2px solid black;
+}
+
+.cells {
+  font-size: var(--xxl);
+  border: 1px solid black;
+  background-color: white;
+}
+
+.cells:hover {
+  background-color: var(--grey);
+}
+
+.restart-btn {
+  padding: 0.5em;
+  font-size: var(--med);
+  background: var(--blue);
+  color: white;
+  border-radius: 10px;
+  border: none;
+}
+
+.restart-btn:hover {
+  background-color: var(--blue-hover);
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Footer  */
+
+footer {
+  border-top: 2px solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--med);
+}
+
+.copyright {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.copyright-icon {
+  width: 1.5rem;
+  height: auto;
+}
+
+.github-icon {
+  width: 2.5rem;
+  height: auto;
+}
+
+.copyright > a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+}

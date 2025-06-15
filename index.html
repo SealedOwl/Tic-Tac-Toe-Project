@@ -16,7 +16,7 @@
       <div class="game-info-container">
         <div class="game-logs"><p>Player-1's turn</p></div>
         <div class="game-settings">
-          <button type="button">
+          <button type="button" id="settings">
             <img src="./images/gear-solid.svg" alt="game settings" />
           </button>
         </div>
@@ -51,5 +51,30 @@
         /></a>
       </p>
     </footer>
+
+    <dialog id="settings-modal">
+      <form action="#" id="settings-form">
+        <h1>Game Settings</h1>
+        <div>
+          <label for="player1">Player-1 Name</label>
+          <input
+            type="text"
+            name="player1"
+            class="name-input"
+            placeholder="Player-1"
+          />
+        </div>
+        <div>
+          <label for="player2">Player-2 Name</label>
+          <input
+            type="text"
+            name="player2"
+            class="name-input"
+            placeholder="Player-2"
+          />
+        </div>
+        <button type="submit" class="submit-btn">Submit</button>
+      </form>
+    </dialog>
   </body>
 </html>

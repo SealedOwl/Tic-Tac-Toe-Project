@@ -93,7 +93,8 @@ main {
   background-color: var(--grey);
 }
 
-.restart-btn {
+.restart-btn,
+.submit-btn {
   padding: 0.5em;
   font-size: var(--med);
   background: var(--blue);
@@ -102,7 +103,8 @@ main {
   border: none;
 }
 
-.restart-btn:hover {
+.restart-btn:hover,
+.submit-btn:hover {
   background-color: var(--blue-hover);
 }
 
@@ -145,4 +147,34 @@ footer {
   justify-content: center;
   align-items: center;
   gap: 0.5em;
+}
+
+/* Dialog / Modal  */
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#settings-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2.5em;
+  border: none;
+  border-radius: 15px;
+}
+
+#settings-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5em;
+}
+
+#settings-form div {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--med);
 }

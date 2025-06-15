@@ -105,7 +105,25 @@ const GameController = (() => {
   return { playRound, currentPlayer, resetGame };
 })();
 
-// GameBoard.setMark(4, "X");
-// console.log(GameBoard.getBoard());
-// GameBoard.resetBoard();
-// console.log(GameBoard.getBoard());
+const settingsBtn = document.querySelector("#settings");
+const modal = document.querySelector("#settings-modal");
+
+modal.addEventListener("click", (e) => {
+  const dialogDimensions = modal.getBoundingClientRect();
+  if (
+    e.clientX < dialogDimensions.left ||
+    e.clientX > dialogDimensions.right ||
+    e.clientY < dialogDimensions.top ||
+    e.clientY > dialogDimensions.bottom
+  ) {
+    modal.close();
+  }
+});
+
+settingsBtn.addEventListener("click", () => {
+  modal.showModal();
+});
+
+// window.addEventListener("DOMContentLoaded", () => {
+//   document.querySelector("#settings-modal").setAttribute("open", "");
+// });

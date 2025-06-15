@@ -34,6 +34,9 @@ const GameController = (() => {
   let currentPlayer = "X";
   let isGameOver = false;
 
+  let player1 = "Player-1";
+  let player2 = "Player-2";
+
   function switchPlayers() {
     currentPlayer = currentPlayer === "X" ? "O" : "X";
   }
@@ -96,13 +99,18 @@ const GameController = (() => {
     return true;
   }
 
+  function changePlayerNames(name1, name2) {
+    player1 = name1 || "Player-1";
+    player2 = name2 || "Player-2";
+  }
+
   function resetGame() {
     currentPlayer = "X";
     isGameOver = false;
     GameBoard.resetBoard();
   }
 
-  return { playRound, currentPlayer, resetGame };
+  return { playRound, currentPlayer, changePlayerNames, resetGame };
 })();
 
 const settingsBtn = document.querySelector("#settings");

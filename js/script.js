@@ -139,7 +139,7 @@ const DisplayController = (() => {
     cell.addEventListener("click", () => {
       GameController.playRound(index);
       renderBoard();
-      updateLogMessage(); /////
+      updateLogMessage();
     });
   });
 
@@ -160,6 +160,4 @@ const DisplayController = (() => {
 
     GameStatus.textContent = `${currentPlayerName}'s Turn`;
   }
-
-  function
 })();

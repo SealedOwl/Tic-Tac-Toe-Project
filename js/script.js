@@ -54,7 +54,7 @@ const GameController = (() => {
 
     if (checkDraw()) {
       isGameOver = true;
-      console.log(`It's a draw!`);
+      console.log(`It's a Tie!`);
       return;
     }
 
@@ -99,6 +99,18 @@ const GameController = (() => {
     return true;
   }
 
+  function getCurrentPlayer() {
+    return currentPlayer;
+  }
+
+  function getPlayer1() {
+    return player1;
+  }
+
+  function getPlayer2() {
+    return player2;
+  }
+
   function changePlayerNames(name1, name2) {
     player1 = name1 || "Player-1";
     player2 = name2 || "Player-2";
@@ -110,7 +122,16 @@ const GameController = (() => {
     GameBoard.resetBoard();
   }
 
-  return { playRound, currentPlayer, changePlayerNames, resetGame };
+  return {
+    playRound,
+    getCurrentPlayer,
+    getPlayer1,
+    getPlayer2,
+    checkWinner,
+    checkDraw,
+    changePlayerNames,
+    resetGame,
+  };
 })();
 
 // DisplayController Module
@@ -123,7 +144,8 @@ const DisplayController = (() => {
   const settingsModal = document.querySelector("#settings-modal");
   const settingsForm = document.querySelector("#settings-form");
   const nameInputs = document.querySelectorAll(".name-input");
-  const submitBtn = document.querySelector(".submit-btn");
+
+  // Render Board
 
   function renderBoard() {
     const board = GameBoard.getBoard();
@@ -135,6 +157,8 @@ const DisplayController = (() => {
     });
   }
 
+  // Mark cells
+
   cells.forEach((cell, index) => {
     cell.addEventListener("click", () => {
       GameController.playRound(index);
@@ -143,21 +167,65 @@ const DisplayController = (() => {
     });
   });
 
+  // Display game status
+
   function updateLogMessage() {
     const currentPlayerName =
-      GameController.currentPlayer === "X"
-        ? GameController.player1
-        : GameController.player2;
+      GameController.getCurrentPlayer() === "X"
+        ? GameController.getPlayer1()
+        : GameController.getPlayer2();
 
-    if (GameBoard.checkWinner()) {
+    if (GameController.checkWinner()) {
       GameStatus.textContent = `${currentPlayerName} Wins!`;
       return;
     }
-    if (GameBoard.checkDraw()) {
+    if (GameController.checkDraw()) {
       GameStatus.textContent = `It's a Tie!`;
       return;
     }
 
     GameStatus.textContent = `${currentPlayerName}'s Turn`;
   }
+
+  // Restart game
+
+  restartBtn.addEventListener("click", () => {
+    GameController.resetGame();
+    renderBoard();
+    updateLogMessage();
+  });
+
+  // Show game settings modal
+
+  settingsBtn.addEventListener("click", () => {
+    settingsModal.showModal();
+  });
+
+  // Close modal when clicked outside
+
+  settingsModal.addEventListener("click", (e) => {
+    const dialogDimensions = settingsModal.getBoundingClientRect();
+    const isOutside =
+      e.clientX < dialogDimensions.left ||
+      e.clientX > dialogDimensions.right ||
+      e.clientY < dialogDimensions.top ||
+      e.clientY > dialogDimensions.bottom;
+    if (isOutside && e.target === settingsModal) {
+      settingsModal.close();
+    }
+  });
+
+  // Change names
+
+  settingsForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const name1 = nameInputs[0].value.trim();
+    const name2 = nameInputs[1].value.trim();
+
+    GameController.changePlayerNames(name1, name2);
+
+    settingsModal.close();
+    updateLogMessage();
+  });
 })();

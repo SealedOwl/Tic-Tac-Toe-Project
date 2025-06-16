@@ -113,25 +113,53 @@ const GameController = (() => {
   return { playRound, currentPlayer, changePlayerNames, resetGame };
 })();
 
-const settingsBtn = document.querySelector("#settings");
-const modal = document.querySelector("#settings-modal");
+// DisplayController Module
 
-modal.addEventListener("click", (e) => {
-  const dialogDimensions = modal.getBoundingClientRect();
-  if (
-    e.clientX < dialogDimensions.left ||
-    e.clientX > dialogDimensions.right ||
-    e.clientY < dialogDimensions.top ||
-    e.clientY > dialogDimensions.bottom
-  ) {
-    modal.close();
+const DisplayController = (() => {
+  const cells = document.querySelectorAll(".cells");
+  const GameStatus = document.querySelector(".game-logs p");
+  const settingsBtn = document.querySelector("#settings");
+  const restartBtn = document.querySelector(".restart-btn");
+  const settingsModal = document.querySelector("#settings-modal");
+  const settingsForm = document.querySelector("#settings-form");
+  const nameInputs = document.querySelectorAll(".name-input");
+  const submitBtn = document.querySelector(".submit-btn");
+
+  function renderBoard() {
+    const board = GameBoard.getBoard();
+
+    cells.forEach((cell, index) => {
+      cell.textContent = board[index];
+      cell.classList.toggle("X-mark", board[index] === "X");
+      cell.classList.toggle("O-mark", board[index] === "O");
+    });
   }
-});
 
-settingsBtn.addEventListener("click", () => {
-  modal.showModal();
-});
+  cells.forEach((cell, index) => {
+    cell.addEventListener("click", () => {
+      GameController.playRound(index);
+      renderBoard();
+      updateLogMessage(); /////
+    });
+  });
 
-// window.addEventListener("DOMContentLoaded", () => {
-//   document.querySelector("#settings-modal").setAttribute("open", "");
-// });
+  function updateLogMessage() {
+    const currentPlayerName =
+      GameController.currentPlayer === "X"
+        ? GameController.player1
+        : GameController.player2;
+
+    if (GameBoard.checkWinner()) {
+      GameStatus.textContent = `${currentPlayerName} Wins!`;
+      return;
+    }
+    if (GameBoard.checkDraw()) {
+      GameStatus.textContent = `It's a Tie!`;
+      return;
+    }
+
+    GameStatus.textContent = `${currentPlayerName}'s Turn`;
+  }
+
+  function
+})();

@@ -1,10 +1,12 @@
 :root {
-  --xxl: 6rem;
+  --xxl: 8rem;
   --xl: 5rem;
   --lg: 3rem;
   --med: 2.5rem;
   --blue: oklch(62.3% 0.214 259.815);
   --blue-hover: oklch(52.3% 0.214 259.815);
+  --red-mark: red;
+  --blue-mark: blue;
   --grey: oklch(87.2% 0.01 258.338);
 }
 
@@ -80,6 +82,7 @@ main {
   height: 45rem;
   display: grid;
   grid-template-columns: repeat(3, calc(100% / 3));
+  grid-template-rows: repeat(3, calc(100% / 3));
   border: 2px solid black;
 }
 
@@ -110,6 +113,14 @@ main {
 
 button {
   cursor: pointer;
+}
+
+.X-mark {
+  color: var(--red-mark);
+}
+
+.O-mark {
+  color: var(--blue-mark);
 }
 
 /* Footer  */
